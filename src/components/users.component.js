@@ -10,6 +10,18 @@ export default class Users extends Component {
     }
 
     componentDidMount() {
+	axios.defaults.baseURL = 'https://tarifmatrix.vbn.de:4445';
+	axios.defaults.headers.get['Content-Type'] = 'application/json;charset=utf-8';
+	axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+
+	axios.get('fares/areas/info', {
+		// Axios looks for the `auth` option, and, if it is set, formats a
+		// basic auth header for you automatically.
+		auth: {
+		    username: 'tbd',
+                    password: 'tbd'
+		}
+            })
         axios.get('http://localhost:4000/users')
             .then(res => {
                 this.setState({ usersCollection: res.data });
